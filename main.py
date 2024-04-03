@@ -28,6 +28,12 @@ async def index():
     return FileResponse("static/index.html")
 
 
+@app.get("/speech")
+async def index():
+    # Return the HTML file as a response
+    return FileResponse("static/speech.html")
+
+
 @app.post("/generate-password")
 async def create_item(params: Params):
     if params.length < 12:

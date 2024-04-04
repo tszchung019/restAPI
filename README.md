@@ -33,3 +33,14 @@ e.g.
   "length":12,
   "hashing": false
 }
+
+Method:
+post 127.0.0.1:8000/get-stock-price-data
+Description:
+- returns stock price based on data provided in the request body in JSON
+e.g. 
+{
+  "symbol":"AAPL", // Stock symbol
+    "interval":"5min", // The following values are supported: 1min, 5min, 15min, 30min, 60min
+    "data_format":"csv" // optional, json or csv, default json
+}

@@ -66,9 +66,7 @@
     }
 
     function intentAction(data) {
-        const regex = /\{(?:[^{}]*|\{(?:[^{}]*|\{[^{}]*\})*\})*\}/g;
-        const jsonObjects = data.match(regex);
-        const finalUnderstanding = JSON.parse(jsonObjects[jsonObjects.length - 1]);
+        const finalUnderstanding = JSON.parse(data);
         document.getElementById('transcript').textContent = `Transcript: ${finalUnderstanding.text}`;
 
         switch (finalUnderstanding.intents[0].name) {
@@ -117,7 +115,8 @@
             }
 
             const data = await response.text();
-            intentAction(data);
+            const jsonString = data.split(/\}(?=\s*\{)/);
+            intentAction(jsonString[jsonString.length - 1]);
         } catch (error) {
             console.error('Error:', error);
         }

@@ -20,8 +20,8 @@ get 127.0.0.1:8000/speech (index.html)
 Description:
 - An input field to upload a audio file (.wav) format (You can record an audio within 20 seconds)
 - After clicking the "Send" button, the transcript of the audio is generated and if one of the following intents is matched, a response is generated:
-=> intent (greeting) -- "Hello, nice to meet you!"
-=> intent (wit/get_weather) -- "It is ${condition} in ${location}." If a location is not given in the speech, the dafault location is Sheffield (Sheffield is a nice city.)
+    - intent (greeting) -- "Hello, nice to meet you!"
+    - intent (wit/get_weather) -- "It is ${condition} in ${location}." If a location is not given in the speech, the dafault location is Sheffield (Sheffield is a nice city.)
     >> The ${condition} is retrieved from another API (https://api.weatherapi.com/v1/current.json)
 
 Method:

@@ -8,6 +8,8 @@ import random
 import string
 import bcrypt
 
+from utilClass.StockPrice import StockPrice
+
 
 def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -16,7 +18,12 @@ def hash_password(password):
 class Params(BaseModel):
     length: int
     hashing: Optional[bool] = False
-    tax: Optional[float] = None
+
+
+class StockParams(BaseModel):
+    symbol: str
+    interval: str
+    data_format: Optional[str] = 'json'
 
 
 app = FastAPI()
@@ -53,3 +60,14 @@ async def create_item(params: Params):
     return {
         "generated_password": random_string
     }
+
+
+@app.post("/get-stock-price-data")
+async def index(params: StockParams):
+    symbol = params.symbol
+    interval = params.interval
+    data_format = params.data_format
+    ticker = StockPrice(symbol, interval, data_format)
+    stock_data = ticker.get_stock_price_data()
+
+    return stock_data
